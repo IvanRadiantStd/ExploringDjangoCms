@@ -16,6 +16,8 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 
+from django.utils.translation import ugettext_lazy as _
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -27,7 +29,7 @@ SECRET_KEY = '=$66o-8ofhfwm^edil=cy7w^l4z*70ng8&!hi%cchn!c42b*o0'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
+FILER_DEBUG = True
 ALLOWED_HOSTS = ['ivradidb.bget.ru']
 
 
@@ -72,11 +74,15 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(DATA_DIR, 'media')
 STATIC_ROOT = os.path.join(DATA_DIR, 'static')
 
+
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'mysite', 'static'),
 )
 SITE_ID = 1
 
+DJANGOCMS_FILE_TEMPLATES = [
+    ('feature', _('Featured Version')),
+]
 
 TEMPLATES = [
     {
@@ -148,7 +154,8 @@ INSTALLED_APPS = (
     'djangocms_snippet',
     'djangocms_googlemap',
     'djangocms_video',
-    'mysite'
+    'mysite',
+    'djangocms_file',
 )
 
 LANGUAGES = (
@@ -178,7 +185,8 @@ CMS_TEMPLATES = (
     ## Customize this
     ('fullwidth.html', 'Fullwidth'),
     ('sidebar_left.html', 'Sidebar Left'),
-    ('sidebar_right.html', 'Sidebar Right')
+    ('sidebar_right.html', 'Sidebar Right'),
+    ('index.html', 'Parent page'),
 )
 
 CMS_PERMISSION = True
